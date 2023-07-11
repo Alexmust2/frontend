@@ -23,6 +23,8 @@ export default {
 
 body {
   background: radial-gradient(circle,rgb(0, 0, 0) 1%, rgb(78, 3, 10) 51%,rgba(0,0,0,1) 100%);
+  height: 100vh;
+  width: 100%;
 }
 
 </style>

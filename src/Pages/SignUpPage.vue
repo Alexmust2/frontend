@@ -20,40 +20,17 @@
     </div>
   </template>
   <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-  
+import GetUserInfo from '@/mixins/GetUserInfo';
+
+
 export default {
   data(){
     return{
       password: '',
       email: '',
-      name: 'Spraym',
     }
   },
-  methods: {
-    showpass() {
-      const pass = document.querySelector('.password')
-      if(pass.getAttribute('type') === 'password'){
-        pass.setAttribute('type', 'text')
-      } else {
-        pass.setAttribute('type', 'password')
-      }
-    },
-    createAccount() {
-      if (this.email != '' && this.password != ''){
-         createUserWithEmailAndPassword(getAuth(), this.email, this.password, this.name)
-         .then((data) => {
-          console.log("Successfuly registered")
-          this.$router.push('/forums')
-         }).catch((error) => {
-          console.log(error.code);
-          alert(error.message)
-         })
-      } else {
-        alert('error')
-      }
-    }
-  }
+  mixins:[GetUserInfo]
 }
   </script>
 

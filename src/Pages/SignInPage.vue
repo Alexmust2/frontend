@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import GetUserInfo from '@/mixins/GetUserInfo';
 
 export default {
   data(){
@@ -31,39 +31,7 @@ export default {
       errMsg: '',
     }
   },
-  methods: {
-    showpass() {
-      const pass = document.querySelector('.password')
-      if(pass.getAttribute('type') === 'password'){
-        pass.setAttribute('type', 'text')
-      } else {
-        pass.setAttribute('type', 'password')
-      }
-    },
-    signIn() {
-      signInWithEmailAndPassword(getAuth(), this.email, this.password)
-        .then((data) => {
-          console.log("Successfuly registered")
-          this.$router.push('/forums')
-        }).catch((error) => {
-          console.log(error.code);
-          switch (error.code) {
-            case "auth/invalid-email":
-              this.errMsg = "Invalid email"
-              break;
-            case "auth/user-not-found":
-              this.errMsg = "No account with that email was found"
-              break;
-            case "auth/wrong-password":
-              this.errMsg = "Incorect password"
-              break;
-            default:
-              this.errMsg = "Email or password was incorrect"
-              break;
-          }
-        })
-    }
-  }
+  mixins: [GetUserInfo]
 }
 </script>
 <style lang="scss" >

@@ -5,49 +5,25 @@
         <router-link to="/forums" style="margin-left: 25px;" class="forums">Форумы</router-link>
     </div>
     <div class="profile__nav" @click="show = !show">
-      <img class="profile__img">
+      <img class="profile__img" :src="image">
       <h2 class="profile__name">{{ name }}</h2>
     </div>
     <profile-modal :show="show"></profile-modal>
   </nav>
 </template>
 <script>
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import ProfileModal from "./UI/ProfileModal.vue";
+import GetUserInfo from '../mixins/GetUserInfo'
+import UserStatus from "@/mixins/UserStatus";
 
 export default {
-  components:{
-    ProfileModal
-  },
     data() {
         return {
-            name: "",
-            show: true
+            show: false
         };
     },
-    mounted() {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log(user);
-                user.displayName = user.email.split("@")[0];
-                this.name = user.displayName;
-                // ...
-            }
-            else {
-            }
-        });
-    },
-    methods: {
-        logout() {
-            const auth = getAuth();
-            signOut(auth).then(() => {
-                console.log("loggedout");
-                this.$router.push("/");
-            });
-        },
-    },
-    components: { ProfileModal }
+    components: { ProfileModal },
+    mixins: [GetUserInfo, UserStatus]
 }
 </script>
 <style scoped lang="scss">
@@ -65,8 +41,8 @@ nav {
   position: absolute;
 }
 .main__navigation {
-    margin-left: 125px;
     position: absolute;
+    left: 125px;
     .main {
         text-decoration: none;
         color: white;
@@ -85,12 +61,11 @@ nav {
   display: flex;
   align-items: center;
   position: absolute;
-  left: 1525px;
+  left: 80%;
   cursor: pointer;
   .profile__name {
     text-decoration: none;
     color: white;
-    margin-right: 125px;
     font-size: 16px;
   }
   .profile__img {
