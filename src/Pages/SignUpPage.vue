@@ -4,11 +4,11 @@
         <h1>Регистрация</h1>
         <div class="email__input">
           <label for="email">Почта</label>
-          <input placeholder="example@gmail.com" type="email" name="email" v-model="email">
+          <input placeholder="example@gmail.com" type="email" name="email" v-model="email" @keyup.enter="createAccount">
         </div>
         <div class="password__input">
           <label for="pass">Пароль</label>
-          <input placeholder="Password" type="password" name="pass" class="password" v-model="password">
+          <input placeholder="Password" type="password" name="pass" class="password" v-model="password" @keyup.enter="createAccount">
           <h3 @click="showpass()">Показать пароль</h3>
         </div>
         <router-link class="signup__router-link" to="#" @click="createAccount()">Создать аккаунт</router-link> 
@@ -27,6 +27,7 @@ export default {
     return{
       password: '',
       email: '',
+      name: 'Spraym',
     }
   },
   methods: {
@@ -40,7 +41,7 @@ export default {
     },
     createAccount() {
       if (this.email != '' && this.password != ''){
-         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+         createUserWithEmailAndPassword(getAuth(), this.email, this.password, this.name)
          .then((data) => {
           console.log("Successfuly registered")
           this.$router.push('/forums')

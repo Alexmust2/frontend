@@ -1,11 +1,11 @@
 <template>
     <div class="forum_container">
-
     </div>
 </template>
 <script>
-export default {
-    
+
+export default {    
+
 }
 </script>
 <style>
