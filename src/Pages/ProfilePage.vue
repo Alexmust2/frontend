@@ -13,13 +13,13 @@
             </div>
             <div class="profile__status">
                 <div class="profile__status-list">
-                        <profile-messages class="message__container" v-for="(status, index) in statusList" :key="index">
-                            <h2>{{ status.body }}</h2>
-                            <h5>{{ status.date }}</h5>
-                        </profile-messages>
+                    <profile-messages @click="deleteStatus(status.id)" class="message__container" v-for="(status, index) in statusList" :key="index">
+                        <h2>{{ status.body }}</h2>
+                        <h5>{{ status.date }}</h5>
+                    </profile-messages>
                     </div>
                 <input type="text" placeholder="Поделитесь тем, что у вас произошло" v-model="statusBody" @keyup.enter="addStatus()"/>
-                <button @click="addStatus()"><img src="@/assets/send.png"></button>
+                <button @click="addStatus()"><i class="las la-paper-plane"></i></button>
             </div>
         </div>
     </div>
@@ -127,6 +127,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+            .las {
+                font-size: 36px;
+            }
         }
     }
     .profile__status-list {

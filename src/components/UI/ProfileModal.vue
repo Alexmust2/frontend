@@ -2,9 +2,9 @@
     <transition name="fade">
     <div v-if="show" class="modal_container">
         <ul>
-            <li @click="$router.push('/profile') ,show = false">Профиль</li>
-            <li @click="$router.push('/settings'),show = false">Настройки</li>
-            <li @click="logout(), show = false">Выйти</li>
+            <li @click="$router.push('/profile') ,show = false"><i class="las la-user"></i>Профиль</li>
+            <li @click="$router.push('/settings'),show = false"><i class="las la-cog"></i>Настройки</li>
+            <li @click="logout(), show = false"><i class="las la-sign-out-alt"></i>Выйти</li>
         </ul>
     </div>
     </transition>
@@ -38,10 +38,16 @@ export default {
         transition: all ease-in-out;
         z-index: 512;
     }
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
     li {
         list-style: none;
         cursor: pointer;
         color: white;
+        display: flex;
     }
     li:nth-child(2) {
         margin-top: 25px;
@@ -49,7 +55,12 @@ export default {
     li:nth-child(3) {
         margin-top: 25px;
     }
-
+    .las{
+        font-size: 24px;
+        position: relative;
+        right: 5px;
+        color: rgb(245, 5, 5);
+    }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s ease;
     }
